@@ -84,7 +84,7 @@ Test the database:
 
 ```sh
 psql sequelize_associations_development
-SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;```
+SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;
 ```
 
 ## Querying
