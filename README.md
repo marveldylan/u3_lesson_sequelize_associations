@@ -109,7 +109,7 @@ Test the database:
 
 ```sh
 psql sequelize_associations_development
-SELECT * FROM "Users" JOIN "Tasks" ON "Tasks"."user_id" = "Users".id;
+SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;
 ```
 
 ## Querying
