@@ -24,7 +24,7 @@ npx sequelize-cli db:create
 Let's create a task model:
 
 ```sh
-npx sequelize-cli model:generate --name task --attributes title:string,userId:integer
+npx sequelize-cli model:generate --name Task --attributes title:string,user_id:integer --underscored
 ```
 
 Now let's set up our association:
@@ -33,15 +33,17 @@ task.js
 ```js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const task = sequelize.define('task', {
+  const Task = sequelize.define('Task', {
     title: DataTypes.STRING,
-    userId: DataTypes.INTEGER
-  }, {});
-  task.associate = function(models) {
+    user_id: DataTypes.INTEGER
+  }, {
+    underscored: true,
+  });
+  Task.associate = function(models) {
     // associations can be defined here
-    task.belongsTo(models.user)
+    Task.belongsTo(models.User)
   };
-  return task;
+  return Task;
 };
 ```
 
@@ -49,16 +51,18 @@ user.js
 ```js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+  const User = sequelize.define('User', {
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
     email: DataTypes.STRING
-  }, {});
-  user.associate = function(models) {
+  }, {
+    underscored: true,
+  });
+  User.associate = function(models) {
     // associations can be defined here
-    user.hasMany(models.task)
+    User.hasMany(models.Task)
   };
-  return user;
+  return User;
 };
 ```
 
@@ -74,6 +78,27 @@ Create a task seed:
 npx sequelize-cli seed:generate --name demo-task
 ```
 
+Create a task:
+```js
+'use strict';
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Tasks', [{
+      title: 'Build an App.',
+      user_id: 1,
+      created_at: new Date(),
+      updated_at: new Date()
+    }], {});
+  },
+
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Tasks', null, {});
+
+  }
+};
+```
+
 Populate the database with seed data:
 
 ```sh
@@ -84,16 +109,16 @@ Test the database:
 
 ```sh
 psql sequelize_associations_development
-SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;
+SELECT * FROM "Users" JOIN "Tasks" ON "Tasks"."user_id" = "Users".id;
 ```
 
 ## Querying
 
 ```js
 // Find all users with their associated tasks
-// Raw SQL: SELECT * FROM users JOIN tasks ON task.userId = user.id;
+// Raw SQL: SELECT * FROM "Users" JOIN tasks ON "Tasks".user_id = "Users".id;
 
-const findAll = async () => {
+const findAllWithTasks = async () => {
     const users = await User.findAll({
         include: [{
             model: Task
@@ -102,7 +127,7 @@ const findAll = async () => {
     console.log("All users with their associated tasks:", JSON.stringify(users, null, 4));
 }
 
-const findAllJohns = async () => {
+const findAllJohnsWithTasks = async () => {
     const users = await User.findAll({
         include: [{
             model: Task,
