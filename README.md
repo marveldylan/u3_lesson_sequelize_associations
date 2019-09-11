@@ -7,7 +7,9 @@
 
 # Sequelize Querying
 
-> Take five minutes and read the Sequelize docs on associations: https://git.generalassemb.ly/bruno/sequelize-associations
+> Take five minutes and read the Sequelize docs on associations: 
+>
+> - https://git.generalassemb.ly/bruno/sequelize-associations
 
 ## Setup
 
