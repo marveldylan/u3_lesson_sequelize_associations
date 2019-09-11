@@ -24,7 +24,7 @@ npx sequelize-cli db:create
 Let's create a task model:
 
 ```sh
-npx sequelize-cli model:generate --name Task --attributes title:string,user_id:integer
+npx sequelize-cli model:generate --name Task --attributes title:string,user_id:integer --underscored
 ```
 
 Now let's set up our association:
