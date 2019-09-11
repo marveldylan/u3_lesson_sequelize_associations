@@ -24,7 +24,7 @@ npx sequelize-cli db:create
 Let's create a task model:
 
 ```sh
-npx sequelize-cli model:generate --name Task --attributes title:string,userId:integer
+npx sequelize-cli model:generate --name Task --attributes title:string,user_id:integer
 ```
 
 Now let's set up our association:
@@ -35,7 +35,7 @@ task.js
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     title: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER
   }, {});
   Task.associate = function(models) {
     // associations can be defined here
@@ -50,8 +50,8 @@ user.js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
     email: DataTypes.STRING
   }, {});
   User.associate = function(models) {
@@ -84,14 +84,14 @@ Test the database:
 
 ```sh
 psql sequelize_associations_development
-SELECT * FROM "Users" JOIN "Tasks" ON "Tasks"."userId" = "Users".id;
+SELECT * FROM "Users" JOIN "Tasks" ON "Tasks"."user_id" = "Users".id;
 ```
 
 ## Querying
 
 ```js
 // Find all users with their associated tasks
-// Raw SQL: SELECT * FROM "Users" JOIN tasks ON "Tasks".userId = "Users".id;
+// Raw SQL: SELECT * FROM "Users" JOIN tasks ON "Tasks".user_id = "Users".id;
 
 const findAllWithTasks = async () => {
     const users = await User.findAll({
