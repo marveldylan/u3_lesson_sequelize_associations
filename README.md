@@ -24,7 +24,7 @@ npx sequelize-cli db:create
 Let's create a task model:
 
 ```sh
-npx sequelize-cli model:generate --name task --attributes title:string,userId:integer
+npx sequelize-cli model:generate --name Task --attributes title:string,userId:integer
 ```
 
 Now let's set up our association:
@@ -33,15 +33,15 @@ task.js
 ```js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const task = sequelize.define('task', {
+  const Task = sequelize.define('Task', {
     title: DataTypes.STRING,
     userId: DataTypes.INTEGER
   }, {});
-  task.associate = function(models) {
+  Task.associate = function(models) {
     // associations can be defined here
-    task.belongsTo(models.user)
+    Task.belongsTo(models.User)
   };
-  return task;
+  return Task;
 };
 ```
 
@@ -49,16 +49,16 @@ user.js
 ```js
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING
   }, {});
-  user.associate = function(models) {
+  User.associate = function(models) {
     // associations can be defined here
-    user.hasMany(models.task)
+    User.hasMany(models.Task)
   };
-  return user;
+  return User;
 };
 ```
 
@@ -84,16 +84,16 @@ Test the database:
 
 ```sh
 psql sequelize_associations_development
-SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;
+SELECT * FROM "Users" JOIN "Tasks" ON "Tasks"."userId" = "Users".id;
 ```
 
 ## Querying
 
 ```js
 // Find all users with their associated tasks
-// Raw SQL: SELECT * FROM users JOIN tasks ON task.userId = user.id;
+// Raw SQL: SELECT * FROM "Users" JOIN tasks ON "Tasks".userId = "Users".id;
 
-const findAll = async () => {
+const findAllWithTasks = async () => {
     const users = await User.findAll({
         include: [{
             model: Task
@@ -102,7 +102,7 @@ const findAll = async () => {
     console.log("All users with their associated tasks:", JSON.stringify(users, null, 4));
 }
 
-const findAllJohns = async () => {
+const findAllJohnsWithTasks = async () => {
     const users = await User.findAll({
         include: [{
             model: Task,
