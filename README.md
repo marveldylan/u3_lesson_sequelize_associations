@@ -13,7 +13,7 @@
 
 ##
 
-## Setup
+Let's go into the repo:
 
 ```sh
 cd sequelize-associations
