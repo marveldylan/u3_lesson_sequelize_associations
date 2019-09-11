@@ -5,7 +5,7 @@
 1. Fork
 1. Clone
 
-# Sequelize Querying
+# Sequelize Associations
 
 > Take five minutes and read the Sequelize docs on associations: 
 >
