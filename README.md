@@ -36,7 +36,9 @@ module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     title: DataTypes.STRING,
     user_id: DataTypes.INTEGER
-  }, {});
+  }, {
+    underscored: true,
+  });
   Task.associate = function(models) {
     // associations can be defined here
     Task.belongsTo(models.User)
@@ -53,7 +55,9 @@ module.exports = (sequelize, DataTypes) => {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     email: DataTypes.STRING
-  }, {});
+  }, {
+    underscored: true,
+  });
   User.associate = function(models) {
     // associations can be defined here
     User.hasMany(models.Task)
