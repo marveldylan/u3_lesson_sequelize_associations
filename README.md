@@ -78,6 +78,27 @@ Create a task seed:
 npx sequelize-cli seed:generate --name demo-task
 ```
 
+Create a task:
+```js
+'use strict';
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Tasks', [{
+      title: 'Build an App.',
+      user_id: 1,
+      created_at: new Date(),
+      updated_at: new Date()
+    }], {});
+  },
+
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Tasks', null, {});
+
+  }
+};
+```
+
 Populate the database with seed data:
 
 ```sh
