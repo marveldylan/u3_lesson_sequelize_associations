@@ -11,6 +11,8 @@
 >
 > - https://git.generalassemb.ly/bruno/sequelize-associations
 
+##
+
 ## Setup
 
 ```sh
