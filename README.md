@@ -3,10 +3,11 @@
 ## Getting started
 
 1. Fork
-1. Create a feature branch
 1. Clone
 
 # Sequelize Querying
+
+> Take five minutes and read the Sequelize docs on associations: https://git.generalassemb.ly/bruno/sequelize-associations
 
 ## Setup
 
