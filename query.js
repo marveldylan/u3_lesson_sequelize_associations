@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
 // Find all users with their associated tasks
-// Raw SQL: SELECT * FROM "Users" JOIN tasks ON "Tasks".user_id = "Users".id;
+// Raw SQL: SELECT * FROM "Users" JOIN tasks ON "Tasks"."userId" = "Users".id;
 
 const findAllWithTasks = async () => {
     const users = await User.findAll({
@@ -33,7 +33,7 @@ const findAll = async () => {
 }
 
 // Create a new user
-// Raw SQL: INSERT INTO users (id, firstName, lastName, email) VALUES (DEFAULT, 'Jane', 'Doe', 'jane@jane.com')
+// Raw SQL: INSERT INTO users (id, firstName, lastName, email, password) VALUES (DEFAULT, 'Jane', 'Doe', 'jane@jane.com', '321cba')
 const createUser = async () => {
     const jane = await User.create({ firstName: "Jane", lastName: "Doe", email: "jane@jane.com" })
     console.log("Jane's auto-generated ID:", jane.id)
