@@ -36,14 +36,11 @@ Now let's set up our association:
 
 task.js
 ```js
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     title: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
-  }, {
-    underscored: true,
-  });
+    userId: DataTypes.INTEGER
+  }, {});
   Task.associate = function(models) {
     // associations can be defined here
     Task.belongsTo(models.User)
@@ -54,11 +51,11 @@ module.exports = (sequelize, DataTypes) => {
 
 user.js
 ```js
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    password: DataTypes.STRING,
     email: DataTypes.STRING
   }, {});
   User.associate = function(models) {
@@ -83,8 +80,6 @@ npx sequelize-cli seed:generate --name task
 
 Create a task:
 ```js
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Tasks', [{
@@ -116,6 +111,10 @@ SELECT * FROM "Users" JOIN "Tasks" ON "Tasks"."userId" = "Users".id;
 ```
 
 ## Querying
+
+```sh
+node query.js
+```
 
 ```js
 // Find all users with their associated tasks
