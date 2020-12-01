@@ -77,6 +77,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    tableName:'users'
   });
   return User;
 };
@@ -86,7 +87,7 @@ migrations/<timestamp>-create-task.js
 ```js
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Tasks', {
+    return queryInterface.createTable('tasks', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -100,7 +101,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'Users',
+          model: 'users',
           key: 'id',
           as: 'userId',
         }
@@ -116,7 +117,7 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Tasks');
+    return queryInterface.dropTable('tasks');
   }
 };  
 ```
@@ -137,7 +138,7 @@ Create a task:
 ```js
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Tasks', [{
+    return queryInterface.bulkInsert('tasks', [{
       title: 'Build an App.',
       userId: 1,
       createdAt: new Date(),
@@ -146,7 +147,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Tasks', null, {});
+    return queryInterface.bulkDelete('tasks', null, {});
 
   }
 };
