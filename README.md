@@ -391,7 +391,7 @@ Let's see if our associations actually work. We'll run a join query on our `User
 
 ```sh
 psql sequelize_associations_development
-SELECT * FROM users JOIN tasks ON tasks."userId" = Users.id;
+SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;
 ```
 
 ## Querying
