@@ -16,7 +16,7 @@ In this lesson, we'll be covering how to build associations bewteen differen mod
 
 > Take five minutes and read the Sequelize docs on associations:
 >
-> - https://sequelize.org/master/manual/associations.html
+> - https://sequelize.org/master/manual/assocs.html
 
 ## What Are Associations
 
