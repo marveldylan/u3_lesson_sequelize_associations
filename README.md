@@ -396,7 +396,7 @@ SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;
 
 ## Querying
 
-Utilizing the [Sequelize Docs](#Resources), write two queries that match their provided sql statements. The functions have been provided for you in `query.js`
+Utilizing the [Sequelize Docs](https://sequelize.org/master/manual/assocs.html#lazy-loading-example), write two queries that match their provided sql statements. The functions have been provided for you in `query.js`
 To run your file, execute:
 
 ```sh
