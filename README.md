@@ -25,7 +25,7 @@ Associations are the relationships that we define between different data entries
 - A user can `have many` pets
 - Pets `belong to` one user
 
-Relational databases rely on associations in order to `join` data that we need in a an organized manner. It also helps reduce database load. Databases can become overwhelmed we being queried repeatedly in a short amount of time. By `joining` data, we can load all of the data we need with one query.
+Relational databases rely on associations in order to `join` data that we need in a an organized manner. It also helps reduce database load. Databases can become overwhelmed when being queried repeatedly in a short amount of time. By `joining` data, we can load all of the data we need with one query.
 
 ## Defining Models
 
@@ -72,34 +72,15 @@ module.exports = (sequelize, DataTypes) => {
 Let's update the `User` model to have a lowercased `tableName`
 
 ```js
-'use strict'
-const { Model } = require('sequelize')
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  User.init(
-    {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
-      password: DataTypes.STRING,
-      email: DataTypes.STRING
-    },
+...
+
     {
       sequelize,
       modelName: 'User',
       tableName: 'users'
     }
-  )
-  return User
-}
+
+...
 ```
 
 Next we'll need to update our migration to reflect our desired `tableName`:
@@ -190,32 +171,15 @@ module.exports = (sequelize, DataTypes) => {
 Let's update the table name for our `Task`:
 
 ```js
-'use strict'
-const { Model } = require('sequelize')
-module.exports = (sequelize, DataTypes) => {
-  class Task extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  Task.init(
-    {
-      title: DataTypes.STRING,
-      userId: DataTypes.INTEGER
-    },
+...
+
     {
       sequelize,
       modelName: 'Task',
       tableName: 'tasks'
     }
-  )
-  return Task
-}
+
+...
 ```
 
 ## Associating Models
@@ -225,7 +189,7 @@ We'll now associate the `User` and `Task` model. The relationship we want to def
 - User `hasMany` Task
 - Task `belongsTo` User
 
-Now you may be thinking that this is a complicated process... Believe it or not, it's not! `Sequelize` models actually have built in methods that make it easy to associate our created models!
+Now, you may be thinking that this is a complicated process... Believe it or not, it isn't! `Sequelize` models actually have built in methods that make it easy to associate our created models!
 
 ### Defining `hasMany`
 
@@ -396,7 +360,7 @@ SELECT * FROM users JOIN tasks ON tasks."userId" = users.id;
 
 ## Querying
 
-Utilizing the [Sequelize Docs](https://sequelize.org/master/manual/assocs.html#lazy-loading-example), write two queries that match their provided sql statements. The functions have been provided for you in `query.js`
+Utilizing the [Sequelize Docs](https://sequelize.org/master/manual/assocs.html#lazy-loading-example), write two queries that match their provided SQL statements. The functions have been provided for you in `query.js`
 To run your file, execute:
 
 ```sh
@@ -405,7 +369,7 @@ node query.js
 
 ## Recap
 
-In this lesson, we learned how define and query associations. Associations are an important concept in the relational database world and are a core fundamental to what makes these databases so powerful.
+In this lesson, we learned how to define and query associations. Associations are an important concept in the relational database world and are a core fundamental to what makes these databases so powerful.
 
 ## Resources
 
